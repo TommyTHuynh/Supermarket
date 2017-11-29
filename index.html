@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<div id="foo"></div>
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		<title>Supermarket</title>
+		<link rel="stylesheet" href="assets/stylesheets/supermarket_design.css">
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'>
+	</head>
+	
+	<body>
+		<header class="primary-header container group">
+		
+			<h1 class="logo">
+				<a href="index.html">Supermarket</a>
+			</h1>
+			
+			<div class="tagline">
+				<h3>Shop with us</h3>
+				<a class ="btn btn-alt" href="register_form.html">Sign Up</a>
+			</div>
+		</header>
+		
+		<section class="row">
+			<div class="container column">
+				<div class="col-2-3">
+					<form class="index-form" action="member.php" method="post">
+						<fieldset class="register-group">
+						
+							<h2>Members Log In Here:</h2>
+							<label>
+							UserName
+								<input type="text" name="username" required></input>
+							</label>
+							<label>
+							Password
+								<input type="password" name="passwd" required></input>
+							</label>
+							
+							<input class="btn btn-default" type="submit" value="Log in"></input>
+						</fieldset>
+					</form>
+				</div><!-- 
+				 --><aside class="col-1-3 help">
+					<h2>Help</h2>
+					<p>New users will enter the site by Signing Up in the right hand corner of the page. Once an account is created, please sign in with the form on the left. Members of the site can look through our database to see the latest content.</p>
+				</aside>
+			</div>
+			
+			<div class="column message">
+				<section>
+					<h2>About Supermarket</h2>
+					<ul>
+						<li>Supermarket is a local food market that is partnered with several suppliers to provide the best produce for our customers.</li>
+					</ul>
+				</section><!--
+				 --><aside class="col-1-3">
+						<h3>Word From Programmer</h3>
+						<p>Future updates to this site will provide more customization between the customer/employee and their page.</p>
+				</aside>
+					
+			</div>
+
+			<div class="column message">
+				<section class="notice">
+					<h2>Notice</h2>
+					<h4>Anything that Supermarket needs to make note of will go here. </h4>
+				</section>
+			</div>
+		</section>
+		
+		<footer class="primary-footer container group">
+		
+			<small>Supermarket. 1234 Street Dr. Houston, TX 77011 (123) 456-7891<br> &copy; 2016 Supermarket. All rights reserverd. Report a problem.</small>
+			
+		</footer>
+	</body>
+	
+</html>

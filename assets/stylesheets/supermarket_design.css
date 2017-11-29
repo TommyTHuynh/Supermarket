@@ -1,0 +1,747 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*
+  ========================================
+  Default Styles - Containers
+  ========================================
+*/
+
+body {
+  background: #3d8af5;
+  color: #888;
+  font: 300 16px/22px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+
+/*
+  ========================================
+  Default Styles - Typography
+  ========================================
+*/
+
+h1, h2, h3, h4 {
+  color: #92c0e2;
+}
+h1, h3, h4, h5, p {
+  margin-bottom: 22px;
+}
+h1 {
+  font-size: 36px;
+  line-height: 44px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 44px;
+}
+h3 {
+  font-size: 21px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  color: #a9b2b9;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+strong {
+  font-weight: 400;
+}
+cite,
+em {
+  font-style: italic;
+}
+
+/*
+  ========================================
+  Default Styles - Anchor
+  ========================================
+*/
+
+a{
+	color: #2255b5;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #a9b2b9;
+}
+
+p a {
+	border-bottom: 1px solid #dfe2e5;
+}
+/*
+  ========================================
+  Header
+  ========================================
+*/
+.primary-header a {
+	color: #fff;
+}
+
+.primary-header a:hover{
+	color: #2255b5;
+}
+
+.logo {
+	border-top: 4px solid #143cd4;
+	float: left;
+	font-size: 48px;
+	font-weight: 100;
+	letter-spacing: .5px;
+	line-height: 44px;
+	padding: 40px 0 22px 0;
+	text-transform: uppercase;
+}
+
+.tagline {
+	margin: 44px 0 22px 0;
+	text-align: right;
+}
+/*
+  ========================================
+  Grid
+  ========================================
+*/
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container {
+	margin: 0 auto;
+	width: 960px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+
+/*
+  ========================================
+  Clearfix
+  ========================================
+*/
+
+.group {
+  clear: both;
+  *zoom: 1;
+}
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+
+/*
+  ========================================
+  Buttons
+  ========================================
+*/
+
+.btn {
+	border-radius: 5px;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: 400;
+	letter-spacing: .5px;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+.btn-alt {
+	border: 1px solid #fff;
+	padding: 10px 30px;
+}
+
+.btn-alt:hover {
+	background: #fff;
+	color: #2255b5;
+}
+
+/*
+  ========================================
+  Rows
+  ========================================
+*/
+
+.row {
+	min-width: 960px;
+	background: #fff;
+	padding: 66px 0 44px 0;
+}
+
+/*
+  ========================================
+  Column
+  ========================================
+*/
+
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container,
+.column {
+	margin: 0 auto;
+	width: 1532px;
+}
+
+.container {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.column,
+.col-1-3,
+.col-2-3 ,
+.col-2-4,
+.col-960 {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.col-1-3,
+.col-2-3,
+.col-2-4,
+.col-960  {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.col-1-3 {
+  width: 33.33%;
+}
+.col-2-3 {
+  width: 66.66%;
+}
+
+.col-2-4{
+  width: 60%;
+}
+
+.col-960 {
+	width: 960px;
+	margin: 0 auto;
+}
+
+/*
+  ========================================
+  Primary Footer
+  ========================================
+*/
+.primary-footer a{
+	color: #fff;
+}
+
+.primary-footer a:hover {
+	color: #2255b5;
+}
+.primary-footer {
+	color: #2255b5;
+	font-size: 14px;
+	padding-bottom: 44px;
+	padding-top: 44px;
+}
+
+.primary-footer small {
+	float: left;
+	font-weight: 400;
+}
+
+/*
+  ========================================
+  Form Layout
+  ========================================
+*/
+.index-form {
+	margin-left: -15px;		
+}
+
+form {
+	margin-bottom: 22px;
+	margin-left: 30px;
+	border: 5px solid #2259d0;
+	background: #9eb9f5;
+	background: -webkit-linear-gradient(to right, #aad2e0, #76c1e2);
+	background:    -moz-linear-gradient(to right, #aad2e0, #76c1e2);
+	background:         linear-gradient(to right, #aad2e0, #76c1e2);
+	border-radius: 5px;
+	padding: 10px;
+	width: 870px;
+}
+
+.col-2-4 form{
+	margin-top: 20px;
+	width:100%;
+}
+
+input,
+select,
+textarea {
+	font: 300 16px/22px "Lato", "Open Sans", Helvetiva, Arial, sans-serif;
+}
+
+/*
+  ========================================
+  Home Buttons and Settings Buttons
+  ========================================
+*/
+
+.profile-settings{
+	width: 100%;
+	margin: 0 auto;
+	border: 0;
+	padding: 0;
+	background: 0;
+}
+
+.profile-settings fieldset,
+.profile-settings input,
+.home-menu ul{
+	font: 100 25px/45px "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.profile-settings fieldset,
+.profile-settings input{
+	padding-left: 26px;
+ }
+
+.profile-settings a,
+.profile-settings input,
+.home-menu a { 
+  	color: #fff;
+	display: inline-block;
+	height: 100%;
+}
+
+.profile-settings a,
+.profile-settings input,
+.home-menu li {
+	background: #395870;
+	background: linear-gradient(#4b98bd, #103856);
+	text-decoration: none;
+	text-align: center;
+}
+
+.profile-settings a,
+.profile-settings input{
+	width: 90%;
+	border: 0;
+	padding: 12px 0;
+	margin: 0 auto 0 auto;
+}
+
+.profile-settings input:last-child,
+.home-menu li:last-child {
+	margin-bottom: 22px;
+}
+
+.profile-settings a:hover,
+.profile-settings input:hover,
+.home-menu li:hover,
+.user-menu a:hover  {
+	background: #395870;
+	box-shadow: inset 0 0 10px 1px rgba(0, 0, 0, .3);
+}
+
+.profile-settings a:first-child,
+.home-menu li:first-child a {
+	border-radius: 4px 4px 0 0;
+}
+
+.profile-settings input:last-child,
+.home-menu li:last-child a {
+	border-bottom: 0;
+	border-radius: 0 0 4px 4px;
+}
+
+.book-table {
+	background: #fff;
+	width: 400px;
+}
+
+/*
+  ========================================
+  Home Buttons and Settings Buttons
+  ========================================
+*/
+
+.setting-form,
+.setting-form h2,
+.setting-form h3,
+.setting-form h4 {
+	font: 100 25px/45px "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	color: #303ce6;
+}
+
+.setting-form h2 {
+	font-size: 40px;
+	font-weight: 100;
+	text-align: center;
+}
+
+.setting-form h3 {
+	margin-top: 22px;
+	font-weight: 200;
+}
+
+.setting-form img {
+	border-radius: 25%;
+	width: 150px;
+	height: 150px;
+	vertical-align: top;
+}
+
+.setting-form label {
+	display: inline-block;
+	text-align: center;
+	margin: 22px 44px 22px 22px;
+}
+
+#repeat-password {
+	margin-left: 12px;
+	margin-right: 0;
+}
+
+
+/*
+  ========================================
+  Member Home Buttons and Image Icon
+  ========================================
+*/
+
+.home-block {
+	border: 1px solid #888;
+	height: auto;
+	width: 26%;
+	margin-top: 20px;
+	border-radius: 5px;
+	background: #00abff;
+	background: linear-gradient(#00abff, #3e667d);
+}
+
+.user-valid {
+	text-transform: uppercase;
+	text-align:center;
+	margin-top: 25px;
+	color: #000;
+}
+
+.home-menu {
+	width: 100%;
+}
+
+.home-menu a{
+	width: 100%;
+}
+
+.home-menu li{
+	border-right: 1px solid rgba(0, 0, 0, .3);
+	padding: 12px 20px;
+	margin: 0 30px 0 30px;
+}
+
+.home-img{
+	border-radius: 50%;
+	width: 150px;
+	height: 150px;
+	margin: -25% 25% -5% 25%;
+	vertical-align: top;
+}
+
+/*
+  ========================================
+  Member-Help
+  ========================================
+*/
+
+.member-info {
+	border: 1px solid #000;
+	height: 275px;
+	margin-bottom: 22px;
+	font: 100 16px/16px "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.member-info h3 {
+	margin: 12px 0 22px 12px; 
+	text-decoration: underline;
+}
+
+.member-info ul {
+	color: #76c1e2;	
+}
+
+.member-info li {
+	list-style-type: circle;
+	list-style: circle inside;
+}
+
+/*
+  ========================================
+  Fieldset Layout
+  ========================================
+*/
+
+.register-group label {
+	color: #2255b5;
+	cursor: pointer;
+	font-weight: 400;
+	border-radius: 5px;
+}
+
+.register-group input,
+.register-group select,
+.register-group textarea {
+	border-radius: 5px;
+	color: #2255b5;
+	display: block;
+	margin: 5px 0 27px 0;
+	padding: 5px 8px;
+}
+
+.register-group input,
+.register-group textarea {
+	width: 100%;
+}
+
+.register-group select {
+	height: 34px;
+	width: 60px;
+}
+
+.register-group textarea {
+	height: 78px;
+}
+
+.register-group h2 {
+	color: #073b61;
+}
+
+input.btn-default{
+	width: 50%;
+	margin-left: 120px;
+}
+
+/*
+  ========================================
+  Index Text Message
+  ========================================
+*/
+
+li {
+	list-style: circle;
+	margin: 0 0 22px 30px;
+}
+
+.message ul li{
+	list-style-type: circle;
+	list-style: circle inside;
+}
+
+.message {
+	vertical-align: top;
+}
+
+.message section{
+	padding-left: 15px;
+	padding-right: 15px;
+	width: 60%;
+	margin-right: 10px;
+	border: 1px solid #888;
+	border-radius: 5px;
+	display: inline-block;
+	margin-bottom: 22px;
+}
+
+.message aside,
+.help {	
+	display: inline-block;
+	border: 1px solid #888;
+	border-radius: 5px;
+}
+
+.message aside {
+	width: 35%;
+	padding: 15px 15px 88px 15px;
+	margin-left: 10px;
+}
+
+section.notice {
+	padding-left: 15px;
+	padding-right: 15px;
+	width: 100%;
+	margin-right: 10px;
+	border: 1px solid #888;
+	border-radius: 5px;
+	display: inline-block;
+	margin-bottom: 22px;
+}
+
+/*
+  ========================================
+  User Message
+  ========================================
+*/
+
+.exception-message {
+	font: 300 40px/40px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #003992;
+}
+
+
+/*
+  ========================================
+  Navigation Defaults
+  ========================================
+*/
+
+nav {
+	width: 960px;
+	margin: 0 auto;
+}
+
+ul li {
+	list-style-type: none;
+}
+
+.nav li:last-child {
+	margin-right: 0;
+}
+
+
+/*
+  ========================================
+  User Menu Navigation
+  ========================================
+*/
+
+.user-menu ul {
+	font: bold 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
+}
+
+.user-menu li {
+	display:inline-block;
+	margin-right: -30px;
+}
+
+.user-menu a {
+	background: #395870;
+	background: linear-gradient(#4b98bd, #103856);
+	border-right: 1px solid rgba(0, 0, 0, .3);
+	color: #fff;
+	padding: 12px 20px;
+	text-decoration: none;
+}
+
+.user-menu li:first-child a {
+	border-radius: 4px 0 0 4px;
+}
+
+.user-menu li:last-child a {
+	border-right: 0;
+	border-radius: 0 4px 4px 0;
+}
+
+/*
+  ========================================
+  Tables
+  ========================================
+*/
+
+table {
+	margin-bottom: 44px;
+	background: #fff;
+	width: 100%;
+}
+
+#supermarket_info {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#supermarket_info td, #supermarket_info th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#supermarket_info tr:nth-child(even){background-color: #f2f2f2;}
+
+#supermarket_info tr:hover {background-color: #ddd;}
+
+#supermarket_info th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4b9aad;
+    color: white;
+}

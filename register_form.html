@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		<title>Supermarket</title>
+		<link rel="stylesheet" href="assets/stylesheets/main.css">
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'>
+	</head>
+	
+	<body>
+		<header class="primary-header container group">
+		
+			<h1 class="logo">
+				<a href="index.html">Supermarket</a>
+			</h1>
+			
+			<div class="tagline">
+				<h3>Shop with us</h3>
+				<a class ="btn btn-alt" href="register_form.html">Sign Up</a>
+			</div>
+		</header>
+		
+		<section class="row">
+			<div class="column container">
+				<form method="post" action="register_new.php">
+					<fieldset class="register-group">
+						<h2>New User Registration</h2>
+						<label>
+							Preferred Username <br /> (between 6 and 16 chars) :
+							<input type="text" name="username" size=16 maxlength=16></input>
+						</label>
+						<label>
+							Phone Number <br /> (between 6 and 16 chars) :
+							<input type="text" name="pnumber" size=10 maxlength=10></input>
+						</label>
+						<label>
+							Address <br /> (between 6 and 16 chars) :
+							<input type="text" name="address" size=5 maxlength=45></input>
+						</label>
+						<label>
+							Password <br />(between 6 and 16 chars):
+							<input type="password" name="passwd" size=16 maxlength=16></input>
+						</label>
+						<label>
+							Confirm Password:
+							<input type="password" name="passwd2" size=16 maxlength=16></input>
+						</label>
+						
+						<input class="btn btn-default" type="submit" value="Register"></input>
+					</fieldset>
+				</form>
+			</div>
+		</section>
+		
+		<footer class="primary-footer container group">
+		
+			<small>Supermarket. 1234 Street Dr. Houston, TX 77011 (123) 456-7891<br> &copy; 2016 Supermarket. All rights reserverd. Report a problem.</small>
+			
+		</footer>
+	</body>
+	
+</html>
