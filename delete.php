@@ -31,19 +31,19 @@ if ( isset($_GET['t']) && isset($_GET['i']) ) {
                 $conn = pdo_connection();
                 $stmt = $conn->prepare('DELETE FROM employee WHERE `EName` = ?');
                 $stmt->execute(array($pK));
-                header('Location: /Supermarket/employee.php');
+                header('Location: /employee.php');
                 break;
             case 'supplier':
                 $conn = pdo_connection();
                 $stmt = $conn->prepare('DELETE FROM supplier WHERE `CompanyID` = ?');
                 $stmt->execute(array($pK));
-                header('Location: /Supermarket/supplier.php');
+                header('Location: /supplier.php');
                 break;
             case 'product':
                 $conn = pdo_connection();
                 $stmt = $conn->prepare('DELETE FROM product WHERE `BarCode` = ?');
                 $stmt->execute(array($pK));
-                header('Location: /Supermarket/product.php');
+                header('Location: /product.php');
                 break;
         }
     } catch (PDOException $pdoEx) {
