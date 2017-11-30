@@ -48,12 +48,19 @@ $conn = db_connect();
 	?>
 					<nav class="home-menu">
 						<ul>
-							<li><a href="products.php">Products</a></li>
+						<?php
+							if($_SESSION['priviledge'] == "customer"){
+?>
+							<li><a href="member.php">User Setting</a></li>
+							<?php						
+}
+?>
+							<li><a href="product.php">Products</a></li>
 							<li><a href="store.php">Store</a></li>
-							<li><a href="supplier.php">Supplier</a></li>
 <?php
 							if($_SESSION['priviledge'] == "employee"){
 ?>	
+							<li><a href="supplier.php">Supplier</a></li>
 							<li><a href="sale.php">Sale</a></li>
 							<li><a href="suppliedby.php">SuppliedBy</a></li>
 							<li><a href="customer.php">Customer</a></li>

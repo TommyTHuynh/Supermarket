@@ -40,11 +40,7 @@ if(!(isset($_SESSION['valid_user']))){
 	exit;
 }	
 
-if(isset($_GET['value_key'])){
-	$var = $_GET['value_key'];
-}
-else 
-	$var = 'store';
+$var = "first";
 
 $conn = db_connect();
 ?>
@@ -80,7 +76,14 @@ $conn = db_connect();
 	?>
 					<nav class="home-menu">
 						<ul>
-							<!--Editable only in Employee--><li><a href="products.php">Products</a></li>
+<?php
+							if($_SESSION['priviledge'] == "customer"){
+?>
+							<li><a href="member.php">User Setting</a></li>
+							<?php						
+}
+?>							
+							<!--Editable only in Employee--><li><a href="product.php">Products</a></li>
 							<!--Not Editable--><li><a href="store.php">Store</a></li>
 							<!-- CUSTOMER SHOULD VIEW HIS/HER OWN ENTRY-->
 							
@@ -122,10 +125,13 @@ $conn = db_connect();
 					";
 	?>
 				</form>
-<?php	
-
+<?php				
+				if($_SESSION['priviledge'] == "employee")
+					$var = "product";
+				else
+					$var = "customer";
 				if ($col_names=get_names($var)){ 
-
+				$user = $_SESSION['valid_user'];
 				$cname_string_query = "select ";
 				$col_names = $conn->query("select column_name
 								from information_schema.columns
@@ -138,7 +144,10 @@ $conn = db_connect();
 					else
 						$cname_string_query .= ", ".lcfirst($rows[0]);
 				}
-				$cname_string_query .= " from $var";
+				if($_SESSION['priviledge'] == "customer")
+					$cname_string_query .= " from $var where Cname = '$user'";
+				else
+					$cname_string_query .= " from $var";
 				$every_row = $conn->query($cname_string_query);
 				
 						$url_array = get_all_table($var);

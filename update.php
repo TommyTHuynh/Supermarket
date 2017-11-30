@@ -41,18 +41,16 @@
 		user_message($new[1]);
 	}
 	else if(isset($delete)){
-		user_message('Delete');
-		print_r($old);
+		user_message('Deleted Successfully');
 		try{
-			//searchAndDestroy($table_name, $col_names, $old);
+			searchAndDestroy($table_name, $col_names, $old);
 		}
 		catch(Exception $e){
 			echo "<b>Error thrown</b>";
 		}
 	}
 	else if(isset($search)){
-		user_message('Search');
-		user_message($table_name);
+		user_message('Search Results');
 		$query = search($table_name, $col_names, $search_term);
 		
 		try{
@@ -68,6 +66,7 @@
 	}
 	else
 		user_message('You should not be here');
+	do_html_URL("$table_name.php", "Go Back");
   }
 
 

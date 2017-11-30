@@ -3,7 +3,7 @@
 if ( isset($_POST['operation']) && $_POST['operation'] == 'insertion' ) {
 
     $table = !empty($_POST['table']) ? $_POST['table'] : '';
-
+	
     switch ( $table ) {
         case 'store':
 
@@ -125,9 +125,9 @@ function insertData( $table, $data ) {
 
 function isUniqueValue( $table, $column, $value, $exceptValue = '' ) {
     $conn = pdo_connection();
-
     if ( $exceptValue ) {
         try {
+
             $stmt = $conn->prepare('SELECT count(*) as total FROM ' . $table . ' WHERE ' . $column . ' = :' . $column . ' AND ' . $column . ' NOT IN ('.$exceptValue.')' );
             $stmt->execute(array(
                 ':'.$column => $value

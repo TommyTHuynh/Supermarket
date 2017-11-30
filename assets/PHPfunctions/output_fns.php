@@ -48,7 +48,7 @@
 	{
 	  // output URL as link and br
 ?>
-			<br /><a href="<?php echo $url;?>"><?php echo $name;?></a><br />
+			<br /><a class = "exception-message" href="<?php echo $url;?>"><?php echo $name;?></a><br />
 <?php
 	}
 	
@@ -62,11 +62,7 @@
 			</div>
 		</section>
 		<?php 
-			if($inner)
-				display_user_menu(); 	
-		}
-		else if($inner){
-			display_user_menu(); 
+	
 		}
 	}
 	
@@ -153,6 +149,7 @@
 							$count++;
 							//EDITABLE PAGES
 							if($edit){
+								
 								echo '<input type="hidden" name="old[]" value="'.$table_entry.'"></input>';
 								echo '<input type="hidden" name="table_name" value="'.$var.'"></input>';
 								//echo "<input type='text' name='new' value='$table_entry' onkeypress=\"this.style.width = ((this.value.length + 1) * 8) + \" px\";\" ></input>";
@@ -204,13 +201,14 @@
 
 			$stores = getStore();
 			foreach ( $stores as $store ) {
+				
 				$dropDownOption .= '<option value="'.$store['StoreID'].'">'.$store['StoreID'].' - ' . $store['Address_city'] . ',' . $store['Address_state']. ', ' . $store['Addess_zip'] .'</option>';
 			}
 
 			$index = array_search('SoldAt', $columns);
 			if ( $index !== false ) {
 				unset($columns[$index]);
-				$dropDown = '<div>
+				$dropDown = '<div class="search_feature">
 				<label>SoldAt: </label>
 				<select name="SoldAt" id="SoldAt">'.$dropDownOption.'</select>
 </div>';
@@ -218,7 +216,6 @@
 		}
 
 		if ( $tableName == 'employee' ) {
-
 			$stores = getStore();
 			foreach ( $stores as $store ) {
 				$dropDownOption .= '<option value="'.$store['StoreID'].'">'.$store['StoreID'].' - ' . $store['Address_city'] . ',' . $store['Address_state']. ', ' . $store['Addess_zip'] .'</option>';
@@ -233,10 +230,10 @@
 
 			if ( $index !== false ) {
 				unset($columns[$index]);
-				$dropDown = '<div>
+				$dropDown = '<div class="search_feature">
 				<label>WorksAt: </label>
 				<select name="WorksAt" id="WorksAt">'.$dropDownOption.'</select>
-</div>';
+			</div>';
 			}
 
 			/*if ( $index3 !== false ) {*/
@@ -253,9 +250,11 @@
 			/*}*/
 		}
 
+		/*Creates the body of the user prompt section. First it will take all the comlumns from $columns. It will then print out the Column name in a label and do so by string manipulation. The user input section will be empty when the $oldData is empty (so first try) and will be filled when there is either an error or there is something in $oldData. Finally, in the case of errors, we want to print a span that tells the user what the error is. Notice that this only prints up to the final box where we have the Works at section*/
 		$columnsHtml = '';
 		foreach ( $columns as $type => $columnName ) {
-			$columnsHtml .= '<div>';
+
+			$columnsHtml .= '<div class="search_feature">';
 			$columnsHtml .= '<label for="'.$columnName.'">'.ucwords(str_replace('_',' ', $columnName)).'</label>';
 			$columnsHtml .= '<input type="text" name="'.$columnName.'" value="'.(!empty($oldData[$columnName]) ? $oldData[$columnName] : '').'" id="'.$columnName.'"">';
 			if ( isset($errors[$columnName]) ) {
@@ -263,9 +262,11 @@
 			}
 			$columnsHtml .= '</div>';
 		}
-
+		
+		/*Now that we've created the strings for the input boxes, here is where we print it out to the user. We use <<< to signigy a string that ends with HTML finside we have the form with us sending through POST tableName and keywork insertion*/
 		$html = <<<HTML
-			<form action="" method="post">
+			<form class="search_feature" action="" method="post">
+			<label>Add Entry:</label>
 			<input type="hidden" name="table" value="{$tableName}">
 			<input type="hidden" name="operation" value="insertion">
 			{$dropDown2} {$columnsHtml} {$dropDown}
@@ -276,7 +277,8 @@ HTML;
 		if ( $tableName == 'employee' && ! $dropDownOption2 ) {
 			//return '<form>All your persons are associated with employee. Please add a new <a href="/person.php"">Person</a> before create an employee.</form>';
 		}
-
+		
+		//In the end we return the HTML code that we have constructed 
 		return $html;
 	}	
 ?>

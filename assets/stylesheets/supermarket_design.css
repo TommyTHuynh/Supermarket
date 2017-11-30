@@ -317,6 +317,12 @@ p a {
 */
 .index-form {
 	margin-left: -15px;		
+	width: 800px;
+}
+
+.index_container{
+	    margin: 0 auto;
+    width: 1251px;
 }
 
 form {
@@ -652,6 +658,7 @@ section.notice {
 .exception-message {
 	font: 300 40px/40px "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: #003992;
+	padding-bottom: 15px;
 }
 
 
@@ -745,3 +752,23 @@ table {
     background-color: #4b9aad;
     color: white;
 }
+/*
+  ========================================
+  Search DIV
+  ========================================
+*/
+
+.search_feature{
+	width: 100px;
+}
+.search_feature label{
+	font-size: 25px;
+    font-weight: bolder;
+    padding-right: 40px;
+    color: #0b5c84;
+}	
+.search_feature input{
+	margin-left: 20px;
+}
+	
+	
