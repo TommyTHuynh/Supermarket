@@ -8,8 +8,8 @@
 			return $result;
 	}
 	function pdo_connection() {
-//		$pdo = new PDO('mysql:host=localhost;dbname=market', 'root', '');
-		$pdo = new PDO('mysql:host=localhost;dbname=market', 'root', '021696');
+//		$pdo = new PDO('mysql:host=dbs.mysql.database.azure.com;dbname=market', 'root', '');
+		$pdo = new PDO('mysql:host=dbs.mysql.database.azure.com;dbname=market', 'smadmin@team4supermarket-dbs', 'cosC3380!');
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		
 		return $pdo;
