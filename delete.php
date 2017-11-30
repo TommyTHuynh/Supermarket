@@ -48,6 +48,6 @@ if ( isset($_GET['t']) && isset($_GET['i']) ) {
         }
     } catch (PDOException $pdoEx) {
         echo $pdoEx->getMessage() . '<br>';
-        echo '<a href="/Supermarket/product.php">Back to Product Page<a>';
+        echo '<a href="/product.php">Back to Product Page<a>';
     }
 }

@@ -166,7 +166,7 @@ if ( isset($_POST['operation']) && $_POST['operation'] == 'insertion' ) {
                 $update = $post;
                 unset($update['CompanyID']);
                 updateData($table, $update, array( 'CompanyID = :pK ', array('pK' => $post['CompanyID']) ));
-                header('Location: /Supermarket/supplier.php');
+                header('Location: /supplier.php');
             } else {
                 $oldData = $post;
             }
@@ -193,7 +193,7 @@ if ( isset($_POST['operation']) && $_POST['operation'] == 'insertion' ) {
                 $update = $post;
                 unset($update['BarCode']);
                 updateData($table, $update, array(' BarCode = :pK ', array('pK' => $post['BarCode'])));
-                header('Location: /Supermarket/product.php');
+                header('Location: /product.php');
             } else {
                 $oldData = $post;
             }
@@ -236,7 +236,7 @@ if ( isset($_POST['operation']) && $_POST['operation'] == 'insertion' ) {
                 unset($update['EName']);
 
                 updateData($table, $update, array( 'EName = :pK ', array('pK' => $post['EName']) ));
-                header('Location: /Supermarket/employee.php');
+                header('Location: /employee.php');
             } else {
                 $oldData = $post;
             }
