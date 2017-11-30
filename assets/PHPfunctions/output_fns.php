@@ -273,7 +273,7 @@
 											$dId = base64_encode($row['companyID']);
 											$pg = 'supplier.php';
 										}
-										echo "<td><a href='/Supermarket/{$pg}?i={$dId}'>edit</a> | <a href='/Supermarket/delete.php?t={$var}&i={$dId}'>delete</a> </td>";
+										echo "<td><a href='{$pg}?i={$dId}'>edit</a> | <a href='delete.php?t={$var}&i={$dId}'>delete</a> </td>";
 									}
 									echo "</tr>";
 								}
