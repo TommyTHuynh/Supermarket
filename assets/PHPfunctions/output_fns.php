@@ -62,7 +62,11 @@
 			</div>
 		</section>
 		<?php 
-	
+			if($inner)
+				display_user_menu(); 	
+		}
+		else if($inner){
+			display_user_menu(); 
 		}
 	}
 	
@@ -87,7 +91,7 @@
 	}	
 		
 		
-	function display_table($var, $every_row)
+	function display_table_new($var, $every_row)
 	{
 		$col_names = get_names($var);
 		
@@ -95,7 +99,7 @@
 		
 		$editables =array("product", "supplier", "employee");
 		if($_SESSION['priviledge'] == 'employee' && in_array($var, $editables))
-			$edit = true;
+			$edit = false;
 		
 ?>
 					<form class="book-table" action="update.php" method="post">
@@ -149,7 +153,6 @@
 							$count++;
 							//EDITABLE PAGES
 							if($edit){
-								
 								echo '<input type="hidden" name="old[]" value="'.$table_entry.'"></input>';
 								echo '<input type="hidden" name="table_name" value="'.$var.'"></input>';
 								//echo "<input type='text' name='new' value='$table_entry' onkeypress=\"this.style.width = ((this.value.length + 1) * 8) + \" px\";\" ></input>";
@@ -190,95 +193,197 @@
 					</form>
 <?php
 	}
-	
-	function generateForm( $tableName, $columns, array $errors = array(), $oldData = array() ) {
+
+		function display_table($var, $col_names, $operation = false)
+		{
+			error_reporting(E_ALL & ~E_NOTICE);
+			// display the table
+
+			// set global variable, so we can test later if this is on the page
+			global $bm_table;
+			$bm_table = true;
+			?>
+			<form class="book-table" name='bm_table' action='delete_bms.php' method='post'>
+				<table id="supermarket_info">
+					<?php
+					echo "<tr>";
+					foreach($col_names as $col)
+					{
+						echo "<th scope='row'>
+								$col
+								</th>";
+					}
+					if ( $operation ) {
+						echo "<th></th>";
+					}
+					echo "</tr>";
+					?>
+					<?php
 
 
-		$dropDownOption = $dropDown = '';
-		$dropDownOption2 = $dropDown2 = '';
+					if (is_array($col_names) && count($col_names)>0)
+					{
+						$conn = db_connect();
+						$test2 = "select ";
 
-		if ( $tableName == 'product' ) {
+						$result2 = $conn->query("select column_name
+								from information_schema.columns
+								where table_schema='market'
+								and table_name='$var'");
+						for($count = 0; $rows = $result2->fetch_row(); ++$count)
+						{
+							if($count == 0)
+								$test2 .= lcfirst($rows[0]);
+							else
+								$test2 .= ", ".lcfirst($rows[0]);
+						}
+						$test2 .= " from $var";
+						$result = $conn->query($test2);
+						$result2 = $conn->query("select column_name
+								from information_schema.columns
+								where table_schema='market'
+								and table_name='$var'");
+						try{
+							if ($result->num_rows > 0) {
+								$test_array = array();
 
-			$stores = getStore();
-			foreach ( $stores as $store ) {
-				
-				$dropDownOption .= '<option value="'.$store['StoreID'].'">'.$store['StoreID'].' - ' . $store['Address_city'] . ',' . $store['Address_state']. ', ' . $store['Addess_zip'] .'</option>';
-			}
+								for($count = 0; $rows = $result2->fetch_row(); ++$count)
+								{
+									$final = lcfirst($rows[0]);
+									$test_array[$count] = $final;
+								}
 
-			$index = array_search('SoldAt', $columns);
-			if ( $index !== false ) {
-				unset($columns[$index]);
-				$dropDown = '<div class="search_feature">
+								while($row = $result->fetch_assoc()){
+									echo "<tr>";
+									foreach($test_array as $testing){
+										echo "<td>";
+										$test2 = $row["$testing"];
+										echo $test2;
+										echo "</td>";
+									}
+									if ( $operation ) {
+
+										if ( $var == 'employee' ) {
+											$dId = base64_encode($row['eName']);
+											$pg = 'employee.php';
+										} elseif ( $var == 'product' ) {
+											$dId = base64_encode($row['barCode']);
+											$pg = 'product.php';
+										} elseif ( $var == 'supplier' ) {
+											$dId = base64_encode($row['companyID']);
+											$pg = 'supplier.php';
+										}
+										echo "<td><a href='/Supermarket/{$pg}?i={$dId}'>edit</a> | <a href='/Supermarket/delete.php?t={$var}&i={$dId}'>delete</a> </td>";
+									}
+									echo "</tr>";
+								}
+							}
+						}
+						catch(Exception $e)
+						{
+							echo "<b>Error thrown</b>";
+						}
+						// TEST FOR ALL TABLES
+
+					}
+					else
+						echo "<tr><td>No Contents on record</td></tr>";
+					?>
+				</table>
+			</form>
+			<?php
+		}
+
+		function generateForm( $tableName, $columns, array $errors = array(), $oldData = array() ) {
+
+
+			$dropDownOption = $dropDown = '';
+			$dropDownOption2 = $dropDown2 = '';
+
+			if ( $tableName == 'product' ) {
+
+				$stores = getStore();
+				foreach ( $stores as $store ) {
+					$dropDownOption .= '<option '.((isset($oldData['StoreID']) && $oldData['StoreID'] == $store['StoreID']) ? ' checked ' : '').' value="'.$store['StoreID'].'">'.$store['StoreID'].' - ' . $store['Address_city'] . ',' . $store['Address_state']. ', ' . $store['Addess_zip'] .'</option>';
+				}
+
+				$index = array_search('SoldAt', $columns);
+				if ( $index !== false ) {
+					unset($columns[$index]);
+					$dropDown = '<div>
 				<label>SoldAt: </label>
 				<select name="SoldAt" id="SoldAt">'.$dropDownOption.'</select>
 </div>';
-			}
-		}
-
-		if ( $tableName == 'employee' ) {
-			$stores = getStore();
-			foreach ( $stores as $store ) {
-				$dropDownOption .= '<option value="'.$store['StoreID'].'">'.$store['StoreID'].' - ' . $store['Address_city'] . ',' . $store['Address_state']. ', ' . $store['Addess_zip'] .'</option>';
+				}
 			}
 
-			$index = array_search('WorksAt', $columns);
-			//$index2 = array_search('EPhone', $columns);
-			//$index3 = array_search('EName', $columns);
-			$index4 = array_search('StartDate', $columns);
-			//unset($columns[$index2]);
-			unset($columns[$index4]);
+			if ( $tableName == 'employee' ) {
 
-			if ( $index !== false ) {
-				unset($columns[$index]);
-				$dropDown = '<div class="search_feature">
+				$stores = getStore();
+				foreach ( $stores as $store ) {
+					$dropDownOption .= '<option '.((isset($oldData['StoreID']) && $oldData['StoreID'] == $store['StoreID']) ? ' checked ' : '').' value="'.$store['StoreID'].'">'.$store['StoreID'].' - ' . $store['Address_city'] . ',' . $store['Address_state']. ', ' . $store['Addess_zip'] .'</option>';
+				}
+
+				$index = array_search('WorksAt', $columns);
+				//$index2 = array_search('EPhone', $columns);
+				//$index3 = array_search('EName', $columns);
+				//$index4 = array_search('StartDate', $columns);
+				//unset($columns[$index2]);
+				//unset($columns[$index4]);
+
+				if ( $index !== false ) {
+					unset($columns[$index]);
+					$dropDown = '<div>
 				<label>WorksAt: </label>
 				<select name="WorksAt" id="WorksAt">'.$dropDownOption.'</select>
-			</div>';
-			}
+</div>';
+				}
 
-			/*if ( $index3 !== false ) {*/
+				/*if ( $index3 !== false ) {*/
 
 				/*foreach ( getPerson() as $person ) {*/
-					/*$dropDownOption2 .= '<option value="'.$person['Name'].'">'.$person['Name'].' - ' . $person['Phone'] .'</option>';*/
+				/*$dropDownOption2 .= '<option value="'.$person['Name'].'">'.$person['Name'].' - ' . $person['Phone'] .'</option>';*/
 				/*}*/
 
 				/*unset($columns[$index3]);*/
 				/*$dropDown2 = '<div>*/
 				/*<label>EName: </label>*/
 				/*<select name="EName" id="EName">'.$dropDownOption2.'</select>*/
-/*</div>';*/
-			/*}*/
-		}
-
-		/*Creates the body of the user prompt section. First it will take all the comlumns from $columns. It will then print out the Column name in a label and do so by string manipulation. The user input section will be empty when the $oldData is empty (so first try) and will be filled when there is either an error or there is something in $oldData. Finally, in the case of errors, we want to print a span that tells the user what the error is. Notice that this only prints up to the final box where we have the Works at section*/
-		$columnsHtml = '';
-		foreach ( $columns as $type => $columnName ) {
-
-			$columnsHtml .= '<div class="search_feature">';
-			$columnsHtml .= '<label for="'.$columnName.'">'.ucwords(str_replace('_',' ', $columnName)).'</label>';
-			$columnsHtml .= '<input type="text" name="'.$columnName.'" value="'.(!empty($oldData[$columnName]) ? $oldData[$columnName] : '').'" id="'.$columnName.'"">';
-			if ( isset($errors[$columnName]) ) {
-				$columnsHtml .= '<span class="help-block">'.$errors[$columnName].'</span>';
+				/*</div>';*/
+				/*}*/
 			}
-			$columnsHtml .= '</div>';
-		}
-		
-		/*Now that we've created the strings for the input boxes, here is where we print it out to the user. We use <<< to signigy a string that ends with HTML finside we have the form with us sending through POST tableName and keywork insertion*/
-		$html = <<<HTML
-			<form class="search_feature" action="" method="post">
-			<label>Add Entry:</label>
+
+			$columnsHtml = '';
+			foreach ( $columns as $type => $columnName ) {
+				$columnsHtml .= '<div>';
+				$columnsHtml .= '<label for="'.$columnName.'">'.ucwords(str_replace('_',' ', $columnName)).'</label>';
+				$columnsHtml .= '<input type="'.($columnName == 'StartDate' ? 'date' : 'text').'" name="'.$columnName.'" value="'.(!empty($oldData[$columnName]) ? $oldData[$columnName] : '').'" id="'.$columnName.'"">';
+				if ( isset($errors[$columnName]) ) {
+					$columnsHtml .= '<span class="help-block">'.$errors[$columnName].'</span>';
+				}
+				$columnsHtml .= '</div>';
+			}
+
+			$o = 'insertion';
+			$b = 'Insert New';
+			if ( isset($_GET['i']) && !empty($oldData) ) {
+				$o = 'update';
+				$b = 'Update';
+			}
+
+			$html = <<<HTML
+			<form action="" method="post">
 			<input type="hidden" name="table" value="{$tableName}">
-			<input type="hidden" name="operation" value="insertion">
+			<input type="hidden" name="operation" value="{$o}">
 			{$dropDown2} {$columnsHtml} {$dropDown}
-			<button type="submit">Save</button>
+			<button type="submit">{$b}</button>
 </form>
 HTML;
 
-		if ( $tableName == 'employee' && ! $dropDownOption2 ) {
+			//if ( $tableName == 'employee' && ! $dropDownOption2 ) {
 			//return '<form>All your persons are associated with employee. Please add a new <a href="/person.php"">Person</a> before create an employee.</form>';
+			//}
+
+			return $html;
 		}
-		
-		//In the end we return the HTML code that we have constructed 
-		return $html;
-	}	
 ?>

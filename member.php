@@ -112,9 +112,9 @@ $conn = db_connect();
 					</div>
 				</section><!--
 				--><section class="col-2-4">
+<?php if(!$_SESSION['priviledge'] == "customer" || $_SESSION['priviledge'] == "employee"){?>
 <form class="book-table" action="update.php" method="post">
 <?php
-			
 				echo "<input type='text' name='search_term[]' style='width: 100px;'></input>";
 				echo "<input type='text' name='search_term[]' style='width: 100px;'></input>";
 				echo "<input type='text' name='search_term[]' style='width: 100px;'></input>";
@@ -123,6 +123,7 @@ $conn = db_connect();
 				echo "
 						<button class='btn' type='submit' name='search' value='search'>Search</button>
 					";
+			}
 	?>
 				</form>
 <?php				
@@ -153,7 +154,7 @@ $conn = db_connect();
 						$url_array = get_all_table($var);
 						$number = get_col($var);
 						if($number != 0)
-							display_table($var, $every_row);
+							display_table_new($var, $every_row);
 				}
 ?>	
 				</section>

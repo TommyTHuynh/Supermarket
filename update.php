@@ -41,9 +41,10 @@
 		user_message($new[1]);
 	}
 	else if(isset($delete)){
-		user_message('Deleted Successfully');
+		user_message('Delete');
+		print_r($old);
 		try{
-			searchAndDestroy($table_name, $col_names, $old);
+			//searchAndDestroy($table_name, $col_names, $old);
 		}
 		catch(Exception $e){
 			echo "<b>Error thrown</b>";
@@ -55,7 +56,7 @@
 		
 		try{
 			if ($query->num_rows > 0)
-				display_table($table_name, $query);
+				display_table_new($table_name, $query);
 			else
 				user_message("None found");
 		}
@@ -66,7 +67,7 @@
 	}
 	else
 		user_message('You should not be here');
-	do_html_URL("$table_name.php", "Go Back");
+  	do_html_URL("$table_name.php", "Go Back");
   }
 
 

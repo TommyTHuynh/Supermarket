@@ -97,28 +97,30 @@ $conn = db_connect();
 				</form>
 <?php	
 
-				if ($col_names=get_names($var)){ 
+				if ($col_names=get_names($var)) {
 
-				$cname_string_query = "select ";
-				$col_names = $conn->query("select column_name
-								from information_schema.columns
-								where table_schema='market'
-								and table_name='$var'");				
-				for($count = 0; $rows = $col_names->fetch_row(); ++$count)
-				{	
-					if($count == 0)
-						$cname_string_query .= lcfirst($rows[0]);
-					else
-						$cname_string_query .= ", ".lcfirst($rows[0]);
-				}
-				$cname_string_query .= " from $var";
-				$every_row = $conn->query($cname_string_query);
-				
-						$url_array = get_all_table($var);
-						$number = get_col($var);
-						if($number != 0)
-							display_table($var, $every_row);
-				}
+	if($_SESSION['priviledge'] == "employee") {
+		if (isset($_POST) && isset($errors)) {
+			$oldData = empty($oldData) ? array() : $oldData;
+			echo generateForm($var, $col_names, $errors, $oldData);
+		} else {
+
+			// $supplier = array();
+			// if (isset($_GET['i'])) {
+			// 	$pK = base64_decode($_GET['i']);
+			// 	$supplier = getSupplier($pK);
+			// }
+
+			// echo generateForm($var, $col_names, array(), $supplier);
+		}
+	}
+	$url_array = get_all_table($var);
+	$number = get_col($var);
+	if($number != 0) {
+		$op = $_SESSION['priviledge'] == "employee";
+		display_table($var, $col_names);
+	}
+		}
 ?>	
 				</section>
 			</div>
