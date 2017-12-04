@@ -35,6 +35,9 @@
       throw new Exception('Your password must be between 6 and 16 characters.'
                            .'Please go back and try again.');
     }
+    if (is_numeric($pnumber) == false){
+      throw new Exception('Your phone number contains non-numeric characters');
+    }
    
     // attempt to register
     // this function can also throw an exception
