@@ -114,6 +114,44 @@ if ( isset($_POST['operation']) && $_POST['operation'] == 'insertion' ) {
             }
 
             break;
+            
+        case 'customer':
+
+            $post = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+            unset($post['operation']);
+            unset($post['table']);
+
+            $errors = array();
+            foreach ( $post as $key => $value ) {
+                if ( !strlen(trim($value)) ) {
+                    $errors[$key] = ucwords(str_replace('_',' ', $key)) . ' is required.';
+                }
+            }
+            $validateStoreId = isUniqueValue( $table, 'CName', $post['CName'] );
+            if ( ! $validateStoreId ) {
+                $errors['CName'] = 'There is already a Person available with this Name';
+            }
+
+            $personData = getSinglePerson($post['CName']);
+            if ( !empty($personData) ) {
+                $post['CPhone'] = $personData['Phone'];
+            } else {
+                //create person
+                insertData('person', array(
+                    'Name' => $post['CName'],
+                    'Phone' => $post['CPhone'],
+                ));
+            }
+
+
+
+            if ( empty($errors) ) {
+                insertData($table, $post);
+            } else {
+                $oldData = $post;
+            }
+
+            break;
     }
 
 } else if ( isset($_POST['operation']) && $_POST['operation'] == 'update' ) {
