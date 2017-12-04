@@ -127,19 +127,19 @@ if ( isset($_POST['operation']) && $_POST['operation'] == 'insertion' ) {
                     $errors[$key] = ucwords(str_replace('_',' ', $key)) . ' is required.';
                 }
             }
-            $validateStoreId = isUniqueValue( $table, 'CName', $post['CName'] );
+            $validateStoreId = isUniqueValue( $table, 'Cname', $post['Cname'] );
             if ( ! $validateStoreId ) {
-                $errors['CName'] = 'There is already a Person available with this Name';
+                $errors['Cname'] = 'There is already a Person available with this Name';
             }
 
-            $personData = getSinglePerson($post['CName']);
+            $personData = getSinglePerson($post['Cname']);
             if ( !empty($personData) ) {
-                $post['CPhone'] = $personData['Phone'];
+                $post['Cphone'] = $personData['Phone'];
             } else {
                 //create person
                 insertData('person', array(
-                    'Name' => $post['CName'],
-                    'Phone' => $post['CPhone'],
+                    'Name' => $post['Cname'],
+                    'Phone' => $post['Cphone'],
                 ));
             }
 
